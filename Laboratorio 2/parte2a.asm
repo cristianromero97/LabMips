@@ -1,83 +1,50 @@
+# los numeros puestos son de ejemplo el resultado deberia ser 12 <-(4x3), si se cambian el mensaje de entrada tambien debe hacerse
 .data
-msg: .asciiz "Ingresa un numero: "
-answer: .asciiz "\nFactorial is: "
+mensaje_entrada:   .asciiz   "****** La multiplicacion de (4 x 3) ***************" 	
+primer_numero:    .word 4    # primer numero a multiplicar
+segundo_numero:   .word 3    # segundo numero a multiplicar
+resultado:        .word 0    # resultado de la multiplicacion
+mensaje_multiplicacion: .asciiz "Resultado de la multiplicación: "
+salto_linea: .asciiz "\n"
 
 .text
 
 main:
-    # Mostrar el mensaje "Ingresa un numero"
-    li $v0, 4
-    la $a0, msg
-    syscall
-
-    # Leer un entero
-    li $v0, 5
-    syscall
-    move $a0, $v0
-
-    # Llamar a la función calculate_factorial
-    jal calculate_factorial
-    move $a1, $v0
-
-    # Mostrar el resultado
-    li $v0, 4
-    la $a0, answer
-    syscall
-
-    move $a0, $a1
-    li $v0, 1
-    syscall
-
-    # Salir del programa
-    li $v0, 10
-    syscall
-
-calculate_factorial:
-    addi $sp, $sp, -4
-    sw $ra, ($sp)
-
-    # Inicializar el resultado del factorial
-    li $t0, 1
-    li $v0, 1  # Código de syscall para imprimir un entero
-
-multiply:
-    beq $a0, $zero, return
-
-    # Llamar a la función mul_sum para multiplicar $t0 por $a0
-    move $s0, $t0
-    move $s1, $a0
-    jal mul_sum
-
-    # Obtener el resultado de la multiplicación en $t0
-    move $t0, $v0
-
-    # Decrementar $a0
-    addi $a0, $a0, -1
-    j multiply
-
-return:
-    lw $ra, ($sp)
-    move $v0, $t0  # Devolver el resultado en $v0
-    jr $ra
-
-mul_sum:
-    # Inicializamos el resultado a 0
-    li $s2, 0
-
-mul_loop:
-    # Sumamos el multiplicando al resultado
-    add $s2, $s2, $s0
-
-    # Decrementamos el multiplicador en 1
-    subi $s1, $s1, 1
-
-    # Comprobamos si el multiplicador es 0
-    beq $s1, $zero, end_mul
-
-    # Si no es 0, repetimos el bucle
-    j mul_loop
-
-end_mul:
-    # Devolver el resultado de la multiplicación en $v0
-    move $v0, $s2
-    jr $ra
+   lw  $s0, primer_numero           # defino $s0 = 4 (primer_numero)
+   lw  $s1, segundo_numero          # defino $s1 = 3 (segundo_numero)
+   li  $t2, 0                       # defino variable auxiliar iniciada en 0
+   
+while:
+   beq  $s1, $zero, escritura  # $s1 = 0 salto a escritura
+   add  $t2, $t2, $s0          # sumo el valor de $s0 de forma iterativa y lo guardo, $t2 = $t2 + $s0 o (ej = $t2 = $t2 + 4) 
+   addi $s1, $s1, -1           # disminuyo el valor de $s1, $s1 = $s1 - 1 o (ej = $s1 = 3 - 1)
+   j while                     # vuelvo al ciclo
+ 
+escritura:
+   sw  $t2, resultado       # escribo el valor de $t2 en la variable "resultado",  resultado = $t2
+   j salida		    # salto a la salida
+    
+salida:   
+   # Imprimo mensaje de entrada
+   li $v0, 4                  
+   la $a0, mensaje_entrada     
+   syscall  
+    	
+   # Imprimo salto de linea 
+   li $v0, 4          
+   la $a0, salto_linea    
+   syscall
+     
+   # Imprimo mensaje de la multiplicacion 
+   li $v0, 4                  
+   la $a0, mensaje_multiplicacion         
+   syscall   	
+        	
+   # Imprimo resultado
+   lw  $a0, resultado          
+   li  $v0, 1                  
+   syscall                     
+           
+   # fin del programa
+   li  $v0, 10              
+   syscall                  

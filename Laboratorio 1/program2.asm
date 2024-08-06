@@ -1,39 +1,91 @@
 .data
-a: .word 0                    # Variable a con valor inicial de 0
-z: .word 1                    # Variable z con valor inicial de 1
-nuevalinea: .asciiz  "\n"     # Salto de linea
 
-.text
+D: .space 80 # asumire que necesito espacio para el arreglo, se puede agrandar el espacio
+B: .word 1   # el enunciado no indica su valor pero le dare el valor de 1
+a: .word 0   # le dare el valor inicial de 0
+
+salto_linea: .asciiz "\n"
+espacio:     .asciiz "  "
+mensaje1:    .asciiz "Los valores numericos del arreglo son : " 
+mensaje2:    .asciiz "El valor de 'A' es igual : "
+mensaje3:    .asciiz "El valor de 'B' es igual : "
+
+
+.text	
+
 main:
-    lw $t0, a      # Guarda el valor de a en el registro $t0
-    lw $t1, z      # Guarda el valor de z en el registro $t1
-
-loop:
-    beq $t1, 10, salida    # Compara el valor del registro $t1 con 10, si $t1 = 10 o vale decir z == 10 salta a salida
-    add $t0, $t0, $t1      # Suma el valor del registro $t0 y $t1 y lo guarda en $t0, $t0 = $t0 + $t1, basicamente a = a + z
-    addi $t1, $t1, 1       # Suma el valor del registro $t1 y una variable constante de 1 y lo guarda en $t1, $t1 = $t1 +1, basicammente z = z + 1
-    j loop                 # Salta de nuevo a loop
-
+	#segun el enunciado estos son los registros donde deben ir a , b y d
+	lw $s0, a	#defino a $s0 = a
+	lw $s1, B	#defino b $s1 = b 
+	la $s2, D	#defino el arreglo en $s2 = D[i]
+	
+	# todo lo siguiente es similar a un ejercicio que vimos en clase donde se ve slt con arreglo
+	#aunque solo la transformacion
+	
+	#Utilizare esto antes del ciclo para imprimir los valores del arreglo
+	#imprimo mensaje 1
+	li $v0, 4
+	la $a0 , mensaje1
+	syscall
+	
+while:
+	addi $t0, $zero, 10	#el valor 10 del ciclo lo dejo en una var temporal
+	slt $t1, $s0, $t0	# a < 10, $t1 guarda el valor menor entro $s0 y $t0
+	beq $t1, $zero, salida		#$t1 guarda el signo, por ende si es cero sale del ciclo
+	
+	#armado del arreglo 
+	#Todo esto es similar a lo que aparece en el ppt para transfomar el arreglo
+	sll $t2, $s0 , 2	# $t2 = i * 4 (byte offset)
+	add $t2, $t2, $s2	# address of array
+	add $t3, $s1 , $s0	# uso una variable temporal para dejar la suma entre a y b
+	sw $t3, 0($t2)		# escribo el valor de la suma (a+b) en el arreglo[i]
+	
+	 # ----Verificacion de lo que sucede dentro del ciclo----
+	 # Imprimir del arreglo
+    	 lw $a0, 0($t2)     
+   	 li $v0, 1
+   	 syscall          
+   	 
+         # Impresion de espacio
+         li $v0, 4          
+         la $a0, espacio 
+         syscall
+		
+	 addi $s0,$s0,1		# a = a + 1
+	 j while
+	
 salida:
-    # El siguiente apartado consiste en la impresion de los valores de a y z, esta parte se puede usar como comprobacion  
-    # Impresión del valor de $t0 (valor de a)
-    li $v0, 1              # Guarda el codigo la constante 1 en el registro $v0, esto me servira para imprimir un valor numerico
-    move $a0, $t0          # Mueve el valor del registro $t0 al registro $a0, que sera el argumennto de salida para el valor de a
-    syscall                # Realiza la llamada de salida para immprimir el valor del registro $t0 en consola
-    
-    # Imprimir una nueva línea
-    li $v0, 4             # Guarda el codigo la constante 4 en el registro $v0, esto me servira como indicador para imprimir una cadena de string 
-    la $a0, nuevalinea    # Carga la direccion de la cadena con la etiqueta nuevalinea 
-    syscall               # Realiza la llamada de salida para imprimir el valor del registro $a0 que contiene el salto de linea
-    
-    # Impresión del valor de $t1 (valor de z)
-    li $v0, 1            # Guarda el codigo la constante 1 en el registro $v0 , esto me serviraa para imprimmir un valor numerico
-    move $a0, $t1        # Mueve el valor del registro $t1 al registro $a0, que sera el argumento de salida para el valor de z
-    syscall              # Realiza la llamada de salida para imprimir el valor del registro $t1 en consola 
-    
-    # Salida del programa
-    li $v0, 10          # Carga el codigo con la constante 10 en el registro $v0, esto me indicara una llamada para finalizar el programa
-    syscall            # Realiza la llamada para finalizar el programa 
 
-
-
+	# Impresion salto de linea inicial
+         li $v0, 4          
+         la $a0, salto_linea    
+         syscall
+         
+	#imprimo mensaje 2
+	li $v0, 4
+	la $a0 , mensaje2
+	syscall
+	
+	#imprimo valor
+	move $a0 , $s0
+	li $v0 , 1
+	syscall
+	
+	#imprimo salto de linea
+	li $v0, 4
+	la $a0 , salto_linea
+	syscall
+	
+	#imprimo mensaje 3
+	li $v0, 4
+	la $a0 , mensaje3
+	syscall
+		
+	#imprimo valor
+	move $a0 , $s1
+	li $v0 , 1
+	syscall
+	
+	#fin del programa
+	li $v0 , 10
+	syscall	

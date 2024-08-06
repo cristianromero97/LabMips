@@ -1,61 +1,71 @@
 .data
-arr: .word 11 22 33 44 66
+
+arr: .word 10 22 15 40 55 80	#se pueden ir añadiendo mas valores, estos son los que aparecen en el ejemplo (4 primeros valores)
+
+#asumire esto que aparece en el codigo tanto el nombre arrlen para largo como evensum para la suma de pares
 arrlen: .word 0
 evensum: .word 0
-newline: .asciiz "\n"
+
+salto_linea: .asciiz "\n"
+mensaje1: .asciiz "El numero sumado par del arreglo final es : "
 
 .text
-main:
-    # Inicializar los registros
-    la $s0, arr        # Cargar la dirección base de arr en $s0
-    la $s1, arrlen     # Cargar la dirección de arrlen en $s1
-    la $s2, evensum    # Cargar la dirección de evensum en $s2
-    la $s3, newline    # Cargar la dirección de newline en $s3
-    lw $t0, 0($s1)     # Cargar el valor de arrlen en $t0
-    subu $s1, $s1, $s0  # Calcular la longitud del arreglo
-    srl $s1, $s1, 2
+	#Todo esto es segun como lo especifica el enunciado....
+main:	
+	#lectura de datos de entrada
+	la $s0, arr
+	la $s1, arrlen 
+	la $s2, evensum	#el ejercicio dice que utilizemos $t0 para guardar los valores de evensum, pero al ser un valor importante utilizare s2, puedo ocupar $t0 solo cambiaria algunos registros
+	#cargo el valor numerico del arreglo = 0 (posicion cero)
+	lw $t0, 0($s1)
+	subu $s1 , $s1, $s0
+	srl $s1, $s1 , 2
+	
+	#Lo que viene de aqui es invencion
+	
+	li $t1, 0  #utilizare un contador, para ir moviendome en el arreglo
+	li $s2, 0  #evensum ya es cero pero aqui lo inicializo en cero para hacer avanzar la suma y que lo concadene	
+	
+while:  
+	beq $t1, $s1 , salida	#si $t1 == $s1, vale decir la cantidad del arreglo es igual al contador, sale del ciclo while
+	lw $t3, 0($s0)		#Guarda en $t3, el inicio del arreglo $s0
+	
+	andi $t4, $t3 , 1	# avanza en una posicion
+	beq $t4, $zero , par	# si $t4 == 0  saltara a la etiqueta par, en caso de que coloquemos bne, saltara a los impares arr[] == 0
+	j iteracion
+	
+par:
+	#suma las posiciones pares y las guarda en evensum
+	add $s2, $s2, $t3
 
-    # Inicializar el contador y el valor de evensum
-    li $t1, 0          # $t1 se usa como contador
-    li $t2, 0          # $t2 se usa como evensum
+iteracion:
+	#avanzo la iteracion del arreglo tanto en memoria,es decir, siguiente posicion, como tambien el contador
+	addi $s0, $s0 , 4
+	addi $t1, $t1 , 1
+	j while
+	
+	
+salida:
+	#lectura del resultado de evensum
+	
+	#imprimo mensaje 1
+	li $v0, 4
+	la $a0 , mensaje1
+	syscall
+	
+	#imprimo valor
+	move $a0 , $s2
+	li $v0 , 1
+	syscall
+	
+	#imprimo salto de linea
+	li $v0, 4
+	la $a0 , salto_linea
+	syscall
+	
+	#fin del programa
+	li $v0, 10
+	syscall	
+	
 
-loop:
-    # Comprobar si hemos recorrido todo el arreglo
-    beq $t1, $s1, print_result
-
-    # Cargar el valor actual del arreglo en $t3
-    lw $t3, 0($s0)
-
-    # Comprobar si el valor es par (es decir, su bit menos significativo es 0)
-    andi $t4, $t3, 1
-    beqz $t4, even
-
-    # Valor impar, omitir y continuar
-    j next_iteration
-
-even:
-    # Sumar el valor par a evensum
-    add $t2, $t2, $t3
-
-next_iteration:
-    # Avanzar al siguiente elemento del arreglo
-    addi $s0, $s0, 4
-    addi $t1, $t1, 1
-    j loop
-
-print_result:
-    # Mostrar el valor de evensum por pantalla
-    move $a0, $t2       # Cargar el valor de evensum en $a0
-    li $v0, 1           # Código de llamada al sistema para imprimir un entero
-    syscall
-
-    # Imprimir una nueva línea
-    li $v0, 4           # Código de llamada al sistema para imprimir una cadena
-    la $a0, newline     # Cargar la dirección de newline en $a0
-    syscall
-
-    # Terminar el programa
-    li $v0, 10
-    syscall
-
-
+		
