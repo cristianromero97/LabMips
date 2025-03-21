@@ -1,4 +1,4 @@
-# Laboratorio Mips - Organizacion Computadores 
+# Laboratorio Mips - Organización Computadores 
 
 Este repositorio consta de todos los laboratorios realizados en el curso Organizacion de Computadores y Estructura de Ordenadores enfocado principalmente en el uso del simulador Mars para el lenguaje assembly.
 
