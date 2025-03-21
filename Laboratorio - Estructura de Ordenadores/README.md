@@ -7,6 +7,8 @@ Para evitar problemas del juego, el jugador solo debe ingresar valores que esté
 
 <h3>Autor: Alejandro Aldea & Sebastian Caroca & Cristian Romero</h3>
 
+<h3>Fecha: 08-07-2022</h3>
+
 Como ejecutar este laboratorio:
 
 1. Iniciar el simulador Mars
