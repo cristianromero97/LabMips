@@ -1,6 +1,13 @@
-# Laboratorio Mips
+# Laboratorio Mips - Organizacion Computadores - Estructura de Ordenadores
 
 Este repositorio consta de todos los laboratorios realizados en el curso Organizacion de Computadores y Estructura de Ordenadores enfocado principalmente en el uso del simulador Mars para el lenguaje assembly.
+
+Como ejecutar estos laboratorios:
+
+1. Iniciar el simulador Mars
+2. Buscar el archivo correspondiente.
+3. Correr el programa a travez de la pestaña <code>run</code>.
+4. Iniciar la ejecución con el icono verde  <code>Run the current program</code>.
 
 <h2>Laboratorio 1: Instrucciones MIPS y Programación en Lenguaje Ensamblador </h2>
 
@@ -9,13 +16,6 @@ El primer laboratorio esta enfocado en realizar operaciones sencillas en Mips, a
 <h3>Autor: Cristian Romero</h3>
 
 <h3>Fecha: 26-04-2024</h3>
-
-Como ejecutar estos laboratorios:
-
-1. Iniciar el simulador Mars
-2. Buscar el archivo correspondiente.
-3. Correr el programa a travez de la pestaña <code>run</code>.
-4. Iniciar la ejecución con el icono verde  <code>Run the current program</code>.
 
 <h3>Primer Programa</h3>
 
@@ -41,7 +41,60 @@ El resultado por consola obtenido es el siguiente:
 
        El numero sumado par del arreglo final es : 152
 
+<h2>Laboratorio 2: Acercándose al Hardware, programación en Lenguaje Ensamblador </h2>
+
+El segundo laboratorio esta enfocado en realizar operaciones matematicas en Mips, con ciertas restricciones y utilizacion de subrutinas.
+
+<h3>Fecha: 02-06-2024</h3>
+
+<h3>Primer Programa</h3>
+
+ El resultado por consola obtenido (dependiendo del valor, ej: 3 y 4 ) es el siguiente:      
+       
+       Por favor ingrese el primer entero: 3
+       
+       Por favor ingrese el segundo entero: 4
+       
+       La diferencia es: -1 (Impar)
+       
+       Nuevo segundo entero: 3
+
+<h3>Segundo Programa</h3>
+
+El resultado por consola obtenido (dependiendo del valor, ej: 3 y 4 ) es el siguiente:         
+
+       Resultado de la multiplicación: 12
+
+<h3>Tercer Programa</h3>
+
+El resultado por consola obtenido (dependiendo del valor, ej: 5 ) es el siguiente:         
+
+      El resultado del factorial es: 120
+
+<h3>Cuarto Programa</h3>
+
+El resultado por consola obtenido (dependiendo del valor, ej: 7 y 6 ) es el siguiente:         
+
+     El resultado de la division es: 1.16
+     
+     El resto de la division es: 0
+
+<h2>Laboratorio 3: Acercándose al Hardware, programación en Lenguaje Ensamblador </h2>
+
+El tercer laboratorio esta enfocado en realizar operaciones matematicas en Mips, principalmente fibonacci.
+
+<h3>Primer y segundo Programa</h3>
+
+El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguiente:         
+
+     Ingrese el número para calcular Fibonacci: 12
+     144
+     
+<h2>Instalación de Mips</h2>
+
+Para la instalación del simulador Mars, utiliza el siguiente link:
+
+[Instalacion](https://dpetersanderson.github.io/)
 
 
-       
-       
+     
