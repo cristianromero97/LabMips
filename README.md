@@ -92,11 +92,13 @@ El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguien
      Ingrese el número para calcular Fibonacci: 12
      144
      
-<h2>Instalación de Mips</h2>
+<h2>Instalación</h2>
 
-Para la instalación del simulador Mars, utiliza el siguiente link:
+Para la instalación del simulador Mars y sus requisitos, utiliza el siguiente link:
 
-[Link de instalación](https://dpetersanderson.github.io/)
+[Link de instalación de Mars](https://dpetersanderson.github.io/)
+
+[Link de instalación de Java]((https://www.oracle.com/java/technologies/downloads/?er=221886))
 
 
      
