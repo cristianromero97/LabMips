@@ -83,6 +83,8 @@ El resultado por consola obtenido (dependiendo del valor, ej: 7 y 6 ) es el sigu
 
 El tercer laboratorio esta enfocado en realizar operaciones matematicas en Mips, principalmente fibonacci.
 
+<h3>Fecha: 15-12-2023</h3>
+
 <h3>Primer y segundo Programa</h3>
 
 El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguiente:         
@@ -94,7 +96,7 @@ El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguien
 
 Para la instalación del simulador Mars, utiliza el siguiente link:
 
-[Instalacion](https://dpetersanderson.github.io/)
+[Link de instalación](https://dpetersanderson.github.io/)
 
 
      
