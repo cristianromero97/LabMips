@@ -21,7 +21,7 @@ Para la instalación del simulador Mars y sus requisitos, utiliza el siguiente l
 
 [Link de instalación de Java](https://www.oracle.com/java/technologies/downloads/?er=221886)
 
-<h2>Definición</h2>     
+<h2>Definición de Fibonacci</h2>     
 
 [Link de definición](https://www.rapidtables.org/math/number/fibonacci.html)
 
