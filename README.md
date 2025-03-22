@@ -90,8 +90,8 @@ El tercer laboratorio esta enfocado en realizar operaciones matematicas en Mips,
 El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguiente:         
 
      Ingrese el número para calcular Fibonacci: 12
-     144
-     
+     El resultado del fibonacci es: 144
+        
 <h2>Instalación</h2>
 
 Para la instalación del simulador Mars y sus requisitos, utiliza el siguiente link:
