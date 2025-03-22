@@ -1,13 +1,10 @@
-# Laboratorio Mips - Estructura de Ordenadores
+# Laboratorio Mips - Organizacion de Computadores
 
-El juego consiste en el concepto de un "Escape Room". Sin embargo, en este caso se toma este concepto a un nivel mas abstracto.
-La idea del juego es seleccionar las opciones adecuadas para escapar el lugar.
+La sucesión comienza con dos números naturales (dependiendo de la referencia, con 0 y 1 en ciertos casos, otras inician con 1 y 1) y a partir de estos, «cada término es la suma de los dos anteriores», es la relación de recurrencia que la define.
 
-Para evitar problemas del juego, el jugador solo debe ingresar valores que estén permitidos, los cuales se mostrarán cada vez que se ingrese una opción en el juego.
+<h3>Autor: Cristian Romero</h3>
 
-<h3>Autor: Alejandro Aldea & Sebastian Caroca & Cristian Romero</h3>
-
-<h3>Fecha: 08-07-2022</h3>
+<h3>Fecha: 15-12-2023</h3>
 
 Como ejecutar este laboratorio:
 
@@ -24,5 +21,7 @@ Para la instalación del simulador Mars y sus requisitos, utiliza el siguiente l
 
 [Link de instalación de Java](https://www.oracle.com/java/technologies/downloads/?er=221886)
 
+<h2>Definición</h2>     
 
-     
+[Link de definición](https://www.rapidtables.org/math/number/fibonacci.html)
+
