@@ -90,6 +90,7 @@ El tercer laboratorio esta enfocado en realizar operaciones matematicas en Mips,
 El resultado por consola obtenido (dependiendo del valor, ej: 12 ) es el siguiente:         
 
      Ingrese el número para calcular Fibonacci: 12
+     
      El resultado del fibonacci es: 144
         
 <h2>Instalación</h2>
