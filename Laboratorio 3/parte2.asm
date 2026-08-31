@@ -21,8 +21,8 @@ main:
     li $a2, 200		# Numero de PALABRAS a inicializar (200 palabras = 800 bytes = tamaño de memolist)
     li $t1, 0		# Inicializa el valor inicial del registro en cero (como lo dice el enunciado)
  
-init_memolist: # Etiqueta init_memlist
-    sw $zero, 0($a1)	# Escribe CERO (registro $zero, siempre vale 0 por hardware) en la posicion actual de memolist.
+init_memolist: 
+    sw $zero, 0($a1)	# Escribe Cero (registro $zero, siempre vale 0 por hardware) en la posicion actual de memolist.
     addi $a1, $a1, 4	# Realiza el movimiento de $a1 para la posicion, es decir, $a1 = $a1 + 4
     addi $t1, $t1, 1	# Realiza el movimiento en 1 para la pos de $t1 , es decir, $t1 = $t1 + 1
     bne $t1, $a2, init_memolist	# Compara el valor entre $a2 y $t1 si es distinto salta a init_memolist, sino continua el codigo (bne = branch not equal o !=)
@@ -39,11 +39,11 @@ init_memolist: # Etiqueta init_memlist
     li $v0, 10           # Carga el codigo de la llamada al sistema para salir del programa
     syscall		 # Realiza la llamada al sistema para salir del programa
  
-fibonacci_memo:	# Etiqueta fibonacci_memo
+fibonacci_memo:	
     li $t0, 2	# Carga el valor de 2 en $t0
     ble $a0, $t0, base_cases_memo	# Salta a la etiqueta base_cases_memo si $a0 <=2
  
-    # --- Calcular la direccion de memolist[n] = base + n*4 ---
+    # Calcular la direccion de memolist[n] = base + n*4 
     la $t3, memolist       # Carga la dirección base de memolist en $t3
     sll $t4, $a0, 2         # $t4 = n * 4 (offset en bytes, ya que cada entero ocupa 4 bytes)
     add $t3, $t3, $t4       # $t3 = &memolist[n]
@@ -63,7 +63,7 @@ fibonacci_memo:	# Etiqueta fibonacci_memo
     lw $t0, 0($sp)	# Carga el valor de $t0, vale decir recupera el valor original $t0 , primero suma 0 con la direccion $sp y luego lo lleva a $a0 para ejecutar lectura
     add $v0, $t0, $v0   # Suma los dos resultados obtenidos
  
-    # --- Recalcular &memolist[n], ya que $t3 pudo ser pisado por las llamadas recursivas ---
+    # Recalcular &memolist[n]
     lw $a0, 4($sp)      # Recupera el n original desde el stack
     la $t3, memolist    # Recarga la dirección base de memolist
     sll $t4, $a0, 2      # $t4 = n * 4
@@ -75,16 +75,16 @@ fibonacci_memo:	# Etiqueta fibonacci_memo
     jr $ra		# Retornamos la direccion guardada en $ra
  
 #Casos base
-base_cases_memo: #Etiqueta base_cases_memo
+base_cases_memo: 
     bnez $a0, one_memo	# Salta a la etiqueta one_memo si $a0 no es $zero
     li $v0, 0		# Carga el valor 0 en $v0
     jr $ra	        # Retornamos la direccion guardada en $ra
 # Caso 1
-one_memo: #Etiqueta one_memo
+one_memo: 
     li $v0, 1	# Carga el valor de 1 en $v0
     jr $ra	# Retorna la direccion almacenada en $ra
  
-memo_hit: #Etiqueta memo_hit
+memo_hit: 
     lw $v0, 0($t3)        # Cargamos el valor almacenado en memolist[n] en $v0 (t3 ya apunta a &memolist[n] en este punto)
     jr $ra		  # Retornamos la direccion guardada en $ra
  
