@@ -22,7 +22,7 @@ main:
     li $t1, 0		# Inicializa el valor inicial del registro en cero (como lo dice el enunciado)
  
 init_memolist: # Etiqueta init_memlist
-    sw $zero, 0($a1)	# Escribe CERO (registro $zero, siempre vale 0 por hardware) en la posicion actual de memolist. OJO: antes se escribia $t1, que es el contador (0,1,2,3...), no un cero real - ese era el bug
+    sw $zero, 0($a1)	# Escribe CERO (registro $zero, siempre vale 0 por hardware) en la posicion actual de memolist.
     addi $a1, $a1, 4	# Realiza el movimiento de $a1 para la posicion, es decir, $a1 = $a1 + 4
     addi $t1, $t1, 1	# Realiza el movimiento en 1 para la pos de $t1 , es decir, $t1 = $t1 + 1
     bne $t1, $a2, init_memolist	# Compara el valor entre $a2 y $t1 si es distinto salta a init_memolist, sino continua el codigo (bne = branch not equal o !=)
